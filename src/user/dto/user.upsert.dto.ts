@@ -5,7 +5,9 @@ import {
   MaxLength,
 } from 'class-validator';
 
-export class CreateUserDto {
+export class UserUpsertDto {
+  id: number;
+
   @IsNotEmpty()
   @MaxLength(20)
   name: string;

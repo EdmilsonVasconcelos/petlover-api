@@ -5,12 +5,12 @@ export class UserResponseDto {
   name: string;
   email: string;
 
-  static toUserResponseDto(user: User): UserResponseDto {
+  static toDto(user: User): UserResponseDto {
     const { id, name, email } = user;
     return { id, name, email } as UserResponseDto;
   }
 
-  static toListUserResponseDto(users: User[]): UserResponseDto[] {
-    return users.map((user) => UserResponseDto.toUserResponseDto(user));
+  static toListDto(users: User[]): UserResponseDto[] {
+    return users.map((user) => UserResponseDto.toDto(user));
   }
 }

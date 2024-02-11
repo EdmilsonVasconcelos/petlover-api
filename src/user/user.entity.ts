@@ -7,9 +7,8 @@ import {
   Unique,
   BeforeInsert,
 } from 'typeorm';
-import { CreateUserDto } from './dto/create.user.dto';
-import { UpdateUserDto } from './dto/update.user.dto';
 import * as bcrypt from 'bcrypt';
+import { UserUpsertDto } from './dto/user.upsert.dto';
 
 @Entity()
 export class User {
@@ -37,20 +36,12 @@ export class User {
     this.password = await bcrypt.hash(this.password, 10);
   }
 
-  static toCreateUser(createUserDto: CreateUserDto): User {
+  static toEntity(dto: UserUpsertDto): User {
     const user = new User();
-    user.name = createUserDto.name;
-    user.email = createUserDto.email;
-    user.password = createUserDto.password;
-    return user;
-  }
-
-  static toUpdateUser(updateUserDto: UpdateUserDto): User {
-    const user = new User();
-    user.id = updateUserDto.id;
-    user.name = updateUserDto.name;
-    user.email = updateUserDto.email;
-    user.password = updateUserDto.password;
+    user.id = dto.id || null;
+    user.name = dto.name;
+    user.email = dto.email;
+    user.password = dto.password;
     return user;
   }
 }
