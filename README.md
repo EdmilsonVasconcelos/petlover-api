@@ -1,5 +1,4 @@
-Petlover: Rede Social para Animais de Estimação
-Descrição:
+# Petlover: Rede Social para Animais de Estimação
 
 Petlover é uma rede social para amantes de animais de estimação. A plataforma permite que usuários:
 
@@ -8,17 +7,19 @@ Compartilhem fotos e vídeos
 Conectem-se com outros donos de animais
 Participem de grupos e comunidades
 Encontrem eventos e serviços para seus pets
-Tecnologias:
 
-NestJS: Framework JavaScript para desenvolvimento de aplicações back-end escaláveis e eficientes.
-Docker: Plataforma para containerização de aplicações, permitindo fácil deploy e escalabilidade.
-PostgreSQL: Banco de dados relacional robusto e confiável para armazenar dados da plataforma.
-Requisitos:
+# Tecnologias:
 
-Node.js v16+
-Docker instalado
-PostgreSQL instalado e configurado
-Instalação:
+## NestJS
+## Docker
+## PostgreSQL
+
+# Requisitos:
+
+## Node.js v16+
+## Docker instalado
+## PostgreSQL instalado e configurado
+## Instalação:
 
 Clone o repositório:
 git clone https://github.com/seu-nome/petlover.git
