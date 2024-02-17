@@ -2,7 +2,6 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { User } from './user.entity';
 import { Test } from '@nestjs/testing';
-import { UserIdGuard } from '../guards/user.id.guard';
 import { UserResponseDto } from './dto/user.response.dto';
 import { UserUpsertDto } from './dto/user.upsert.dto';
 

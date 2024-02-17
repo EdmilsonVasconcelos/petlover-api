@@ -74,7 +74,7 @@ describe('UserService', () => {
   it('should throw not found exception when no users are found', async () => {
     jest.spyOn(repository, 'find').mockResolvedValue([]);
 
-    await expect(service.findAll()).rejects.toThrowError('No users found');
+    await expect(service.findAll()).rejects.toThrow('No users found');
   });
 
   it('should be able to find a user by id', async () => {
