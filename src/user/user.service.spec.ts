@@ -90,7 +90,7 @@ describe('UserService', () => {
   it('should throw not found exception when no user is found by id', async () => {
     jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
 
-    await expect(service.findOne('1')).rejects.toThrowError('No users found');
+    await expect(service.findOne('1')).rejects.toThrow('No users found');
   });
 
   it('should be able to find a user by email', async () => {
@@ -106,8 +106,8 @@ describe('UserService', () => {
   it('should throw not found exception when no user is found by email', async () => {
     jest.spyOn(repository, 'findOne').mockResolvedValue(undefined);
 
-    await expect(
-      service.findOneByEmail('someemail@gmail.com'),
-    ).rejects.toThrowError('No users found for email');
+    await expect(service.findOneByEmail('someemail@gmail.com')).rejects.toThrow(
+      'No users found for email',
+    );
   });
 });
