@@ -24,10 +24,7 @@ describe('UserController', () => {
           },
         },
       ],
-    })
-      .overrideGuard(UserIdGuard)
-      .useValue({ canActivate: jest.fn(() => true) })
-      .compile();
+    }).compile();
 
     controller = moduleRef.get<UserController>(UserController);
     service = moduleRef.get<UserService>(UserService);
