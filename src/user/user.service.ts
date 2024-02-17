@@ -15,6 +15,7 @@ export class UserService {
     if (user.id) {
       user.password = await bcrypt.hash(user.password, 10);
     }
+
     return this.usersRepository.save(user);
   }
 
@@ -35,6 +36,18 @@ export class UserService {
 
     if (!user) {
       throw new NotFoundException('No users found');
+    }
+
+    return user;
+  }
+
+  async findOneByEmail(email: string): Promise<User> {
+    const user = await this.usersRepository.findOne({
+      where: { email: email },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`No users found for email: ${email}`);
     }
 
     return user;

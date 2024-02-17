@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -11,20 +13,26 @@ import { User } from './user.entity';
 import { UserService } from './user.service';
 import { UserUpsertDto } from './dto/user.upsert.dto';
 import { UserResponseDto } from './dto/user.response.dto';
+import { Public } from 'src/decorators/public.routes';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Public()
   @Post()
-  async save(@Body() user: UserUpsertDto): Promise<UserResponseDto> {
-    const response = await this.userService.upsert(User.toEntity(user));
+  async save(@Body() userUpsertDto: UserUpsertDto): Promise<UserResponseDto> {
+    const response = await this.userService.upsert(
+      User.toEntity(userUpsertDto),
+    );
     return UserResponseDto.toDto(response);
   }
 
   @Put()
-  async update(@Body() user: UserUpsertDto): Promise<UserResponseDto> {
-    const response = await this.userService.upsert(User.toEntity(user));
+  async update(@Body() userUpsertDto: UserUpsertDto): Promise<UserResponseDto> {
+    const response = await this.userService.upsert(
+      User.toEntity(userUpsertDto),
+    );
     return UserResponseDto.toDto(response);
   }
 
@@ -40,6 +48,7 @@ export class UserController {
     return UserResponseDto.toDto(response);
   }
 
+  @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<void> {
     await this.userService.remove(id);
