@@ -14,8 +14,8 @@ import { User } from './user.entity';
 import { UserService } from './user.service';
 import { UserUpsertDto } from './dto/user.upsert.dto';
 import { UserResponseDto } from './dto/user.response.dto';
-import { Public } from 'src/decorators/public.routes';
-import { UserIdGuard } from 'src/guards/user.id.guard';
+import { Public } from '../decorators/public.routes';
+import { UserIdGuard } from '../guards/user.id.guard';
 
 @Controller('user')
 export class UserController {
