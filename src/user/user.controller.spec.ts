@@ -8,11 +8,9 @@ import { UserUpsertDto } from './dto/user.upsert.dto';
 
 describe('UserController', () => {
   let controller: UserController;
-  let service: any;
+  let service: UserService;
 
   beforeEach(async () => {
-    service = { findAll: jest.fn() };
-
     const moduleRef = await Test.createTestingModule({
       controllers: [UserController],
       providers: [
@@ -56,7 +54,7 @@ describe('UserController', () => {
         const responseExpected: UserResponseDto[] =
           UserResponseDto.toListDto(users);
 
-        service.findAll.mockResolvedValue(users);
+        jest.spyOn(service, 'findAll').mockResolvedValue(users);
 
         const response = await controller.findAll();
 
@@ -68,7 +66,7 @@ describe('UserController', () => {
       it('should return searched user', async () => {
         const user = createMockUser();
 
-        service.findOne.mockResolvedValue(user);
+        jest.spyOn(service, 'findOne').mockResolvedValue(user);
 
         const response = await controller.findById('someId');
 
@@ -81,7 +79,7 @@ describe('UserController', () => {
     it('should create a user', async () => {
       const user = createMockUser();
 
-      service.upsert.mockResolvedValue(user);
+      jest.spyOn(service, 'upsert').mockResolvedValue(user);
 
       const response = await controller.save({} as UserUpsertDto);
 
@@ -93,7 +91,7 @@ describe('UserController', () => {
     it('should update a user', async () => {
       const user = createMockUser();
 
-      service.upsert.mockResolvedValue(user);
+      jest.spyOn(service, 'upsert').mockResolvedValue(user);
 
       const response = await controller.update({} as UserUpsertDto);
 
@@ -103,7 +101,7 @@ describe('UserController', () => {
 
   describe('Delete', () => {
     it('should delete a user', async () => {
-      service.remove.mockResolvedValue();
+      jest.spyOn(service, 'remove').mockResolvedValue();
 
       await controller.remove('someId');
 
