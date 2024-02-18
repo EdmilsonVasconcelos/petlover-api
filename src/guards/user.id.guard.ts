@@ -12,6 +12,8 @@ export class UserIdGuard implements CanActivate {
 
     const requestBodyUserId = request.body.id;
     const requestParamsUserId = request.params?.id;
+    const requestHeadersUserId = request.headers?.ownerId;
+
     const userFromToken = request.user;
     const isPublic = request.isPublic;
 
@@ -21,11 +23,18 @@ export class UserIdGuard implements CanActivate {
     const isValidUserIdRequestParams =
       Number(userFromToken?.id) === Number(requestParamsUserId);
 
+    const isValidUserIdHeaders =
+      Number(userFromToken?.id) === Number(requestHeadersUserId);
+
     if (!isPublic && requestParamsUserId && !isValidUserIdRequestParams) {
       throw new UnauthorizedException();
     }
 
     if (!isPublic && requestBodyUserId && !isValidUserIdBody) {
+      throw new UnauthorizedException();
+    }
+
+    if (!isPublic && requestHeadersUserId && !isValidUserIdHeaders) {
       throw new UnauthorizedException();
     }
 

@@ -6,9 +6,11 @@ import {
   UpdateDateColumn,
   Unique,
   BeforeInsert,
+  OneToMany,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserUpsertDto } from './dto/user.upsert.dto';
+import { Pet } from 'src/pet/pet.entity';
 
 @Entity()
 export class User {
@@ -30,6 +32,9 @@ export class User {
 
   @UpdateDateColumn()
   updateAt: Date;
+
+  @OneToMany(() => Pet, (pet) => pet.owner)
+  pets: Pet[];
 
   @BeforeInsert()
   async hashPassword() {
