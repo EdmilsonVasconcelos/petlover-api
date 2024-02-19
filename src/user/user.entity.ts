@@ -11,6 +11,7 @@ import {
 import * as bcrypt from 'bcrypt';
 import { UserUpsertDto } from './dto/user.upsert.dto';
 import { Pet } from 'src/pet/pet.entity';
+import { forwardRef } from '@nestjs/common';
 
 @Entity()
 export class User {

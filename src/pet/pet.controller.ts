@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Headers,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { PetService } from './pet.service';
 import { Pet } from './pet.entity';
 import { PetUpsertDto } from './dto/pet.upsert.dto';
@@ -25,14 +33,19 @@ export class PetController {
     return this.petService.remove(id);
   }
 
+  @UseGuards(UserIdGuard)
   @Post()
-  async upsert(@Body() PetUpsertDto: PetUpsertDto) {
-    return this.petService.upsert(Pet.toEntity(PetUpsertDto));
+  async upsert(
+    @Body() petUpsertDto: PetUpsertDto,
+    @Headers('ownerId') ownerId: number,
+  ): Promise<Pet> {
+    petUpsertDto.ownerId = ownerId;
+    return this.petService.upsert(Pet.toEntity(petUpsertDto));
   }
 
   @UseGuards(UserIdGuard)
   @Put()
-  async update(@Body() PetUpsertDto: PetUpsertDto) {
-    return this.petService.upsert(Pet.toEntity(PetUpsertDto));
+  async update(@Body() petUpsertDto: PetUpsertDto) {
+    return this.petService.upsert(Pet.toEntity(petUpsertDto));
   }
 }

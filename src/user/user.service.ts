@@ -20,7 +20,7 @@ export class UserService {
   }
 
   async findAll(): Promise<User[]> {
-    const users = await this.usersRepository.find();
+    const users = await this.usersRepository.find({ relations: ['pets'] });
 
     if (!users.length) {
       throw new NotFoundException('No users found');
@@ -32,6 +32,7 @@ export class UserService {
   async findOne(id: string): Promise<User> {
     const user = await this.usersRepository.findOne({
       where: { id: Number(id) },
+      relations: ['pets'],
     });
 
     if (!user) {
@@ -44,6 +45,7 @@ export class UserService {
   async findOneByEmail(email: string): Promise<User> {
     const user = await this.usersRepository.findOne({
       where: { email: email },
+      relations: ['pets'],
     });
 
     if (!user) {

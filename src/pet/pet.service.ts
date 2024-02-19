@@ -1,10 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Pet } from './pet.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PetService {
-  constructor(private petRepository: Repository<Pet>) {}
+  constructor(
+    @InjectRepository(Pet)
+    private petRepository: Repository<Pet>,
+  ) {}
 
   async upsert(pet: Pet): Promise<Pet> {
     return this.petRepository.save(pet);

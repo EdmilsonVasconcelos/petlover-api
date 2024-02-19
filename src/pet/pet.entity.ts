@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { PetType } from './pet.type';
 import { PetUpsertDto } from './dto/pet.upsert.dto';
+import { forwardRef } from '@nestjs/common';
 
 @Entity()
 export class Pet {

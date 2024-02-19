@@ -12,7 +12,7 @@ export class UserIdGuard implements CanActivate {
 
     const requestBodyUserId = request.body.id;
     const requestParamsUserId = request.params?.id;
-    const requestHeadersUserId = request.headers?.ownerId;
+    const requestHeadersUserId = request.headers?.ownerid;
 
     const userFromToken = request.user;
     const isPublic = request.isPublic;
