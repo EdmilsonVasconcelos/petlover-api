@@ -13,6 +13,6 @@ export class PetResponseDto {
   }
 
   static toListDto(pets: Pet[]): PetResponseDto[] {
-    return pets.map((pet) => PetResponseDto.toDto(pet));
+    return pets?.map((pet) => PetResponseDto.toDto(pet));
   }
 }
