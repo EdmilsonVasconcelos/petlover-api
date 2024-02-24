@@ -16,7 +16,9 @@ export class UserService {
   ) {}
 
   async upsert(user: User): Promise<User> {
-    await this.checkExistsUser(user.email);
+    if (!user.id) {
+      await this.checkExistsUser(user.email);
+    }
 
     if (user.id) {
       user.password = await bcrypt.hash(user.password, 10);
