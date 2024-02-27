@@ -1,3 +1,4 @@
+import { formatDate } from 'src/utils/utils';
 import { Pet } from '../pet.entity';
 
 export class PetResponseDto {
@@ -9,7 +10,13 @@ export class PetResponseDto {
 
   static toDto(pet: Pet): PetResponseDto {
     const { id, name, birthDate, type, ownerId } = pet;
-    return { id, name, birthDate: '', type, ownerId } as PetResponseDto;
+    return {
+      id,
+      name,
+      birthDate: birthDate ? formatDate(birthDate) : 'No birth date',
+      type,
+      ownerId,
+    } as PetResponseDto;
   }
 
   static toListDto(pets: Pet[]): PetResponseDto[] {

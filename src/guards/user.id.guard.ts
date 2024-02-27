@@ -17,25 +17,31 @@ export class UserIdGuard implements CanActivate {
     const userFromToken = request.user;
     const isPublic = request.isPublic;
 
-    const isValidUserIdBody =
-      Number(userFromToken?.id) === Number(requestBodyUserId);
-
     const isValidUserIdRequestParams =
       Number(userFromToken?.id) === Number(requestParamsUserId);
+
+    const isValidUserIdBody =
+      Number(userFromToken?.id) === Number(requestBodyUserId);
 
     const isValidUserIdHeaders =
       Number(userFromToken?.id) === Number(requestHeadersUserId);
 
     if (!isPublic && requestParamsUserId && !isValidUserIdRequestParams) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(
+        'Você não tem permissão para acessar este recurso',
+      );
     }
 
     if (!isPublic && requestBodyUserId && !isValidUserIdBody) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(
+        'Você não tem permissão para acessar este recurso',
+      );
     }
 
     if (!isPublic && requestHeadersUserId && !isValidUserIdHeaders) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(
+        'Você não tem permissão para acessar este recurso',
+      );
     }
 
     return true;

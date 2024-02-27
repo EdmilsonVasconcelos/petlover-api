@@ -36,6 +36,18 @@ export class PetService {
     return pet;
   }
 
+  async findOneByOwnerId(ownerId: number): Promise<Pet[]> {
+    const pets = await this.petRepository.find({
+      where: { ownerId },
+    });
+
+    if (!pets.length) {
+      throw new NotFoundException('No pets found');
+    }
+
+    return pets;
+  }
+
   async remove(id: number): Promise<void> {
     const pet = await this.findOne(id);
     await this.petRepository.delete(pet.id);

@@ -5,6 +5,7 @@ import {
   Headers,
   Post,
   Put,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { PetService } from './pet.service';
@@ -19,6 +20,14 @@ export class PetController {
   @Get()
   async findAll() {
     return this.petService.findAll();
+  }
+
+  @Get('by-logged-user')
+  async findOneByLoggedUser(@Req() req: Request) {
+    const user = req['user'];
+    const ownerId = user.id;
+
+    return this.petService.findOneByOwnerId(ownerId);
   }
 
   @UseGuards(UserIdGuard)

@@ -10,6 +10,7 @@ import {
 import { PetType } from './pet.type';
 import { PetUpsertDto } from './dto/pet.upsert.dto';
 import { forwardRef } from '@nestjs/common';
+import { convertToDate } from 'src/utils/utils';
 
 @Entity()
 export class Pet {
@@ -45,7 +46,7 @@ export class Pet {
     const pet = new Pet();
     pet.id = petUpserDto.id;
     pet.name = petUpserDto.name;
-    pet.birthDate = new Date(petUpserDto.birthDate);
+    pet.birthDate = convertToDate(petUpserDto.birthDate);
     pet.type = petUpserDto.type as PetType;
     pet.ownerId = petUpserDto.ownerId;
     return pet;
